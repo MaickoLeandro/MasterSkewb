@@ -1,0 +1,69 @@
+package br.com.javaskewb.core.Solution.utils;
+
+import br.com.javaskewb.core.Cube.State;
+
+public class StateNode {
+    private State state;
+    private StateNode parent;
+    private String move;
+    private int distance;
+    private Scramble scramble = new Scramble();
+
+    public StateNode(State state, int distance){
+        setState(state);
+        setDistance(distance);
+    }
+
+    public StateNode(State state, int distance, String move, StateNode parent){
+        setState(state);
+        setDistance(distance);
+        setMove(move);
+        setParent(parent);
+    }
+
+    public StateNode(State state, int distance, Scramble scramble){
+        setState(state);
+        setDistance(distance);
+        setScramble(scramble);
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
+    public StateNode getParent() {
+        return parent;
+    }
+
+    public void setParent(StateNode parent) {
+        this.parent = parent;
+    }
+
+    public String getMove() {
+        return move;
+    }
+
+    public void setMove(String move) {
+        this.move = move;
+    }
+
+    public Scramble getScramble() {
+        return scramble;
+    }
+
+    public void setScramble(Scramble scramble) {
+        this.scramble = scramble;
+    }
+}
