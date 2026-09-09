@@ -1,4 +1,4 @@
-package br.edu.ufersa.masterSkewb.domain.entities;
+package br.edu.ufersa.masterSkewb.domain.valueObjects;
 
 public record Password(String password) {
     public Password {

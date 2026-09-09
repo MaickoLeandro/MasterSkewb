@@ -1,4 +1,4 @@
-package br.edu.ufersa.masterSkewb.domain.entities;
+package br.edu.ufersa.masterSkewb.domain.valueObjects;
 
 public record Email(String email) {
     public Email{

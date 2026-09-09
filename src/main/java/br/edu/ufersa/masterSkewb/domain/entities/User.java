@@ -1,5 +1,9 @@
 package br.edu.ufersa.masterSkewb.domain.entities;
 
+import br.edu.ufersa.masterSkewb.domain.valueObjects.Email;
+import br.edu.ufersa.masterSkewb.domain.valueObjects.Name;
+import br.edu.ufersa.masterSkewb.domain.valueObjects.Password;
+
 import java.util.Objects;
 
 public class User {
