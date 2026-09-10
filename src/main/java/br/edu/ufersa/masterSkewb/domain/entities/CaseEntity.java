@@ -4,10 +4,10 @@ import br.edu.ufersa.masterSkewb.domain.valueObjects.Name;
 import br.edu.ufersa.masterSkewb.domain.valueObjects.StateId;
 
 public class CaseEntity {
-    long id;
-    Name name;
-    StateId stateId;
-    Method method;
+    private long id;
+    private Name name;
+    private StateId stateId;
+    private Method method;
 
     public CaseEntity(long id, Name name, StateId stateId, Method method) {
         this.id = id;
