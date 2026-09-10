@@ -1,4 +1,4 @@
-package br.edu.ufersa.masterSkewb.api.dtos;
+package br.edu.ufersa.masterSkewb.api.dtos.User;
 
 import br.edu.ufersa.masterSkewb.domain.valueObjects.Email;
 import br.edu.ufersa.masterSkewb.domain.valueObjects.Name;

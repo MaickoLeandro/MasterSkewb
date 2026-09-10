@@ -1,6 +1,9 @@
 package br.edu.ufersa.masterSkewb.api.controllers;
 
-import br.edu.ufersa.masterSkewb.api.dtos.*;
+import br.edu.ufersa.masterSkewb.api.dtos.algorithm.AlgorithmCreate;
+import br.edu.ufersa.masterSkewb.api.dtos.algorithm.AlgorithmPatch;
+import br.edu.ufersa.masterSkewb.api.dtos.algorithm.AlgorithmResponse;
+import br.edu.ufersa.masterSkewb.api.dtos.algorithm.AlgorithmUpdate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
