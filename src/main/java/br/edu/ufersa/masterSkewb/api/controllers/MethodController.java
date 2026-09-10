@@ -1,9 +1,9 @@
 package br.edu.ufersa.masterSkewb.api.controllers;
 
-import br.edu.ufersa.masterSkewb.api.dtos.MethodCreate;
-import br.edu.ufersa.masterSkewb.api.dtos.MethodPatch;
-import br.edu.ufersa.masterSkewb.api.dtos.MethodResponse;
-import br.edu.ufersa.masterSkewb.api.dtos.MethodUpdate;
+import br.edu.ufersa.masterSkewb.api.dtos.Method.MethodCreate;
+import br.edu.ufersa.masterSkewb.api.dtos.Method.MethodPatch;
+import br.edu.ufersa.masterSkewb.api.dtos.Method.MethodResponse;
+import br.edu.ufersa.masterSkewb.api.dtos.Method.MethodUpdate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
