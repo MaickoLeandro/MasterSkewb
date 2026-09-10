@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/metodos/{methodId}")
+@RequestMapping("/api/v1/metodos/{methodId}/casos")
 public class CaseController {
     @GetMapping
     public ResponseEntity<List<CaseResponse>> list(@PathVariable long methodId) {
