@@ -12,8 +12,6 @@ public class User {
     private Email email;
     private Password password;
 
-    public User(){};
-
     public User(long id, Name name, Email email, Password password){
         this.id = id;
         this.name = Objects.requireNonNull(name);
