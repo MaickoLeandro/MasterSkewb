@@ -1,7 +1,7 @@
 package br.edu.ufersa.masterSkewb.api.controllers;
 
-import br.edu.ufersa.masterSkewb.api.dtos.CaseResponse;
-import br.edu.ufersa.masterSkewb.api.dtos.CaseUpdate;
+import br.edu.ufersa.masterSkewb.api.dtos.Case.CaseResponse;
+import br.edu.ufersa.masterSkewb.api.dtos.Case.CaseUpdate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
