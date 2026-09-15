@@ -1,4 +1,4 @@
-package br.edu.ufersa.masterSkewb.api.dtos.Method;
+package br.edu.ufersa.masterSkewb.api.dtos.methods;
 
 import br.edu.ufersa.masterSkewb.domain.valueObjects.Name;
 

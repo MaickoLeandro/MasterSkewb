@@ -1,9 +1,9 @@
 package br.edu.ufersa.masterSkewb.api.controllers;
 
-import br.edu.ufersa.masterSkewb.api.dtos.User.UserCreate;
-import br.edu.ufersa.masterSkewb.api.dtos.User.UserPatch;
-import br.edu.ufersa.masterSkewb.api.dtos.User.UserResponse;
-import br.edu.ufersa.masterSkewb.api.dtos.User.UserUpdate;
+import br.edu.ufersa.masterSkewb.api.dtos.users.UserCreate;
+import br.edu.ufersa.masterSkewb.api.dtos.users.UserPatch;
+import br.edu.ufersa.masterSkewb.api.dtos.users.UserResponse;
+import br.edu.ufersa.masterSkewb.api.dtos.users.UserUpdate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
