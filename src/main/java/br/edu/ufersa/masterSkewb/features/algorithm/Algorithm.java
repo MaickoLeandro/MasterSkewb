@@ -4,13 +4,14 @@ import br.edu.ufersa.masterSkewb.features.valueObjects.Moves;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "tb_algorithm")
+@Table (name = "algorithm")
 public class Algorithm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long userId;
     private long caseId;
+    @Embedded
     private Moves moves;
 
     public Algorithm() {}

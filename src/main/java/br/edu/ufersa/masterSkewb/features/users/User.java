@@ -8,13 +8,16 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_usuario")
+@Table(name = "user")
 class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Embedded
     private Name name;
+    @Embedded
     private Email email;
+    @Embedded
     private Password password;
 
     public User() {}
