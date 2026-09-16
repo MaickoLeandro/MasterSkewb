@@ -4,8 +4,8 @@ import br.edu.ufersa.masterSkewb.features.valueObjects.Name;
 import jakarta.persistence.*;
 
 
-
 @Entity
+@Table(name = "method")
 class Method {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
