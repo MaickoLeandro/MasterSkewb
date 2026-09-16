@@ -2,6 +2,7 @@ package br.edu.ufersa.masterSkewb.features.cases;
 
 import br.edu.ufersa.masterSkewb.features.valueObjects.Name;
 import br.edu.ufersa.masterSkewb.features.valueObjects.StateId;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -9,11 +10,12 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "method")
-
 class Case {
     @Id
     private long id;
+    @Embedded
     private Name name;
+    @Embedded
     private StateId stateId;
     private long methodId;
 
