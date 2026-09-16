@@ -3,9 +3,11 @@ package br.edu.ufersa.masterSkewb.features.algorithm;
 import br.edu.ufersa.masterSkewb.features.valueObjects.Moves;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table (name = "algorithm")
-public class Algorithm {
+class Algorithm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -20,10 +22,8 @@ public class Algorithm {
         this.id = id;
         this.userId = userId;
         this.caseId = caseId;
-        this.moves = moves;
+        this.moves = Objects.requireNonNull(moves);
     }
-
-
 
     public long getId() {
         return id;
