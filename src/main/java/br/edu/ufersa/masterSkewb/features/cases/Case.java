@@ -2,16 +2,14 @@ package br.edu.ufersa.masterSkewb.features.cases;
 
 import br.edu.ufersa.masterSkewb.features.valueObjects.Name;
 import br.edu.ufersa.masterSkewb.features.valueObjects.StateId;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "method")
 class Case {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Embedded
     private Name name;
