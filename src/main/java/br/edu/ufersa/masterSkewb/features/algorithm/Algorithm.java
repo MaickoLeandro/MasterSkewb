@@ -1,12 +1,10 @@
 package br.edu.ufersa.masterSkewb.features.algorithm;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import br.edu.ufersa.masterSkewb.features.valueObjects.Moves;
+import jakarta.persistence.*;
 
 @Entity
-
+@Table (name = "tb_algorithm")
 public class Algorithm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

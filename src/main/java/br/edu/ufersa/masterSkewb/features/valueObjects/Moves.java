@@ -1,4 +1,4 @@
-package br.edu.ufersa.masterSkewb.features.algorithm;
+package br.edu.ufersa.masterSkewb.features.valueObjects;
 
 import jakarta.persistence.Embeddable;
 
