@@ -1,5 +1,6 @@
 package br.edu.ufersa.masterSkewb.features.cases;
 
+import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseCreate;
 import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseResponse;
 import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseUpdate;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class CaseController {
 
 
     @PostMapping
-    public ResponseEntity<CaseResponse> post(@PathVariable long methodId, @RequestBody CaseUpdate dto) {
+    public ResponseEntity<CaseResponse> post(@PathVariable long methodId, @RequestBody CaseCreate dto) {
         return null;
     }
 

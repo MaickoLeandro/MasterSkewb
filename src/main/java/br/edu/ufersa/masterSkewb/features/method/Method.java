@@ -10,6 +10,8 @@ class Method {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Embedded
     private Name name;
 
     public Method(long id, Name name) {
