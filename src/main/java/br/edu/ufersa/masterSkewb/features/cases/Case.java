@@ -1,21 +1,30 @@
 package br.edu.ufersa.masterSkewb.features.cases;
 
-import br.edu.ufersa.masterSkewb.features.method.Method;
 import br.edu.ufersa.masterSkewb.features.valueObjects.Name;
 import br.edu.ufersa.masterSkewb.features.valueObjects.StateId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-public class Case {
+
+
+@Entity
+class Case {
+    @Id
     private long id;
     private Name name;
     private StateId stateId;
-    private Method method;
+    private long methodId;
 
-    public Case(long id, Name name, StateId stateId, Method method) {
+    public Case() {}
+
+    public Case(long id, Name name, StateId stateId, long methodId) {
         this.id = id;
         this.name = name;
         this.stateId = stateId;
-        this.method = method;
+        this.methodId = methodId;
     }
+
+
 
     public long getId() {
         return id;
@@ -29,7 +38,7 @@ public class Case {
         return stateId;
     }
 
-    public Method getMethod() {
-        return method;
+    public long getMethodId() {
+        return methodId;
     }
 }

@@ -3,14 +3,23 @@ package br.edu.ufersa.masterSkewb.features.users;
 import br.edu.ufersa.masterSkewb.features.valueObjects.Email;
 import br.edu.ufersa.masterSkewb.features.valueObjects.Name;
 import br.edu.ufersa.masterSkewb.features.valueObjects.Password;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.util.Objects;
 
-public class User {
+@Entity
+class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Name name;
     private Email email;
     private Password password;
+
+    public User() {}
 
     public User(long id, Name name, Email email, Password password){
         this.id = id;

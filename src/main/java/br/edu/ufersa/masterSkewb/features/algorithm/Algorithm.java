@@ -1,41 +1,44 @@
 package br.edu.ufersa.masterSkewb.features.algorithm;
 
-import br.edu.ufersa.masterSkewb.features.cases.Case;
-import br.edu.ufersa.masterSkewb.features.users.User;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 
 public class Algorithm {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private User user;
-    private Case caseEntity;
+    private long userId;
+    private long caseId;
+    private Moves moves;
 
-    public Algorithm(long id, User user, Case caseEntity){
+    public Algorithm() {}
+
+    public Algorithm(long id,long userId, long caseId,  Moves moves) {
         this.id = id;
-        this.user = validarUser(user);
-        this.caseEntity = validarCaseEntity(caseEntity);
+        this.userId = userId;
+        this.caseId = caseId;
+        this.moves = moves;
     }
 
-    private User validarUser(User user){
-        if(user == null)
-            throw new IllegalArgumentException("Usuário não pode ser vazio");
-        return user;
-    }
 
-    private Case validarCaseEntity(Case caseEntity){
-        if(user == null){
-            throw new IllegalArgumentException("Caso não pode ser vazio");
-        }
-        return caseEntity;
-    }
 
     public long getId() {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public Case getCaseEntity() {
-        return caseEntity;
+    public long getCaseId() {
+        return caseId;
+    }
+
+    public Moves getMoves() {
+        return moves;
     }
 }

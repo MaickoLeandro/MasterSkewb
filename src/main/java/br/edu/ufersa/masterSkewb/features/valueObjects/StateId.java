@@ -1,7 +1,8 @@
 package br.edu.ufersa.masterSkewb.features.valueObjects;
 
-public record StateId(long id) {
-    public StateId(long id){
-        this.id = id;
-    }
+
+import jakarta.persistence.Embeddable;
+
+@Embeddable
+public record StateId(long stateId) {
 }
