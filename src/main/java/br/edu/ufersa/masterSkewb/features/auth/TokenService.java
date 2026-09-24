@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 
 @Service
-class TokenService {
+public class TokenService {
     @Value("$")
     private String secret;
     public String generateToken(User user) {
