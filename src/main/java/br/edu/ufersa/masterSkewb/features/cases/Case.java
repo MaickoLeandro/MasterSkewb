@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "method")
+@Table(name = "case")
 class Case {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
