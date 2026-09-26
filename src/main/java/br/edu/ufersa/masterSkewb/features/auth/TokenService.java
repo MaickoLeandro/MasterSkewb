@@ -10,7 +10,7 @@ import java.time.Instant;
 
 @Service
 public class TokenService {
-    @Value("$")
+    @Value("${jwt.secret}")
     private String secret;
     public String generateToken(User user) {
         Algorithm algorithm = Algorithm.HMAC256(secret);
