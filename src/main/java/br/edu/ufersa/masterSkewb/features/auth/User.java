@@ -39,6 +39,12 @@ class User implements UserDetails {
         this.password = Objects.requireNonNull(password);
     }
 
+    public User(Email email, Password password, UserRole role) {
+        this.email = Objects.requireNonNull(email);
+        this.password = Objects.requireNonNull(password);
+        this.role = Objects.requireNonNull(role);
+    }
+
     public Email getEmail() {
         return email;
     }
