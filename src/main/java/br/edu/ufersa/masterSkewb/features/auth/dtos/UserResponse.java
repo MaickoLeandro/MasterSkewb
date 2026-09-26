@@ -2,6 +2,7 @@ package br.edu.ufersa.masterSkewb.features.auth.dtos;
 
 import br.edu.ufersa.masterSkewb.features.valueObjects.Email;
 import br.edu.ufersa.masterSkewb.features.valueObjects.Name;
+import jakarta.validation.Valid;
 
-public record UserResponse(long id, Name name, Email email) {
+public record UserResponse(long id, @Valid Name name, @Valid Email email) {
 }

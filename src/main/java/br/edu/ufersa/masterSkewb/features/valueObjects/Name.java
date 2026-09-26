@@ -1,11 +1,10 @@
 package br.edu.ufersa.masterSkewb.features.valueObjects;
 
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotBlank;
 
 @Embeddable
-public record Name(String name) {
-    public Name{
-        if(name == null || name.isBlank())
-            throw new IllegalArgumentException("Nome inválido");
-    }
+public record Name(
+        @NotBlank(message = "O nome é obrigatório")
+        String name) {
 }

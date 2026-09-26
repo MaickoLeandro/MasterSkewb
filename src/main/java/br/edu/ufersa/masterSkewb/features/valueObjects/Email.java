@@ -1,11 +1,11 @@
 package br.edu.ufersa.masterSkewb.features.valueObjects;
 
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotBlank;
 
 @Embeddable
-public record Email(String email) {
-    public Email{
-        if(email == null || !email.contains("@"))
-            throw new IllegalArgumentException("O endereço de e-mail é inválido");
-    }
+public record Email(
+        @NotBlank(message = "O e-mail é obrigatório")
+        @jakarta.validation.constraints.Email(message = "Formato de e-mail inválido")
+        String email) {
 }
