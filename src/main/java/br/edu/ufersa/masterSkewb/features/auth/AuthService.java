@@ -1,6 +1,7 @@
 package br.edu.ufersa.masterSkewb.features.auth;
 
 import br.edu.ufersa.masterSkewb.features.auth.dtos.AuthDTOs;
+import br.edu.ufersa.masterSkewb.features.shared.exception.OperacaoInvalidaException;
 import br.edu.ufersa.masterSkewb.features.valueObjects.Password;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ public class AuthService {
 
     public void registrar(AuthDTOs.RegisterRequestDTO dto) {
         if (userRepository.findByEmail(dto.email()).isPresent()) {
-            throw new IllegalArgumentException("E-mail já cadastrado no sistema.");
+            throw new OperacaoInvalidaException("E-mail já cadastrado no sistema.");
         }
+
         String encryptedPassword = passwordEncoder.encode(dto.password().password());
         Password password = new Password(encryptedPassword);
-        User user = new User(dto.email(), password, dto.role());
+
+        User user = new User(dto.name(), dto.email(), password, dto.role());
         userRepository.save(user);
     }
 }

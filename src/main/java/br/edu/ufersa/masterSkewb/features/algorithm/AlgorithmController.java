@@ -1,10 +1,12 @@
 package br.edu.ufersa.masterSkewb.features.algorithm;
 
+import br.edu.ufersa.masterSkewb.features.auth.User;
 import br.edu.ufersa.masterSkewb.features.algorithm.dtos.AlgorithmCreate;
 import br.edu.ufersa.masterSkewb.features.algorithm.dtos.AlgorithmResponse;
 import br.edu.ufersa.masterSkewb.features.algorithm.dtos.AlgorithmUpdate;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,8 +41,9 @@ public class AlgorithmController {
     public ResponseEntity<AlgorithmResponse> create(
             @PathVariable long methodId,
             @PathVariable long caseId,
-            @RequestBody @Valid AlgorithmCreate dto) {
-        return ResponseEntity.ok(algorithmApplicationService.createAlgorithm(userId, methodId, caseId, dto));
+            @RequestBody @Valid AlgorithmCreate dto,
+            @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(algorithmApplicationService.createAlgorithm(user.getId(), methodId, caseId, dto));
     }
 
     @PutMapping("/{algorithmId}")
@@ -49,9 +52,9 @@ public class AlgorithmController {
             @PathVariable long caseId,
             @PathVariable long algorithmId,
             @RequestBody @Valid AlgorithmUpdate dto,
-
+            @AuthenticationPrincipal User user
     ) {
-        return ResponseEntity.ok(algorithmApplicationService.updateAlgorithm(userId, methodId, caseId, algorithmId, dto));
+        return ResponseEntity.ok(algorithmApplicationService.updateAlgorithm(user.getId(), methodId, caseId, algorithmId, dto));
     }
 
 

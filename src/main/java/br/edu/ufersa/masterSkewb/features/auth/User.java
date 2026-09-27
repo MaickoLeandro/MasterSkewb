@@ -14,7 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_users")
-class User implements UserDetails {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -39,7 +39,8 @@ class User implements UserDetails {
         this.password = Objects.requireNonNull(password);
     }
 
-    public User(Email email, Password password, UserRole role) {
+    public User(Name name, Email email, Password password, UserRole role) {
+        this.name = Objects.requireNonNull(name);
         this.email = Objects.requireNonNull(email);
         this.password = Objects.requireNonNull(password);
         this.role = Objects.requireNonNull(role);
