@@ -57,6 +57,12 @@ class CaseApplicationService {
         caseRepository.delete(findCaseByIdAndMethodId(methodId, caseId));
     }
 
+    public CaseResponse getCaseByIdAndMethodId(long methodId, long caseId) {
+        Case aCase = findCaseByIdAndMethodId(methodId,  caseId);
+
+        return toResponse(aCase, methodService.getMethodById(caseId));
+    }
+
     private Case findCaseByIdAndMethodId(long methodId, long caseId) {
         return caseRepository.findByIdAndMethodId(caseId, methodId).orElseThrow();
     }
