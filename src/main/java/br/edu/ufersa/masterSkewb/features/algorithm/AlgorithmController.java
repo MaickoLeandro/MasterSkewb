@@ -40,7 +40,7 @@ public class AlgorithmController {
             @PathVariable long methodId,
             @PathVariable long caseId,
             @RequestBody @Valid AlgorithmCreate dto) {
-        return ResponseEntity.ok(algorithmApplicationService.createAlgorithm(methodId, caseId, dto));
+        return ResponseEntity.ok(algorithmApplicationService.createAlgorithm(userId, methodId, caseId, dto));
     }
 
     @PutMapping("/{algorithmId}")
@@ -48,9 +48,10 @@ public class AlgorithmController {
             @PathVariable long methodId,
             @PathVariable long caseId,
             @PathVariable long algorithmId,
-            @RequestBody @Valid AlgorithmUpdate dto
+            @RequestBody @Valid AlgorithmUpdate dto,
+
     ) {
-        return ResponseEntity.ok(algorithmApplicationService.updateAlgorithm(methodId, caseId, algorithmId, dto));
+        return ResponseEntity.ok(algorithmApplicationService.updateAlgorithm(userId, methodId, caseId, algorithmId, dto));
     }
 
 
