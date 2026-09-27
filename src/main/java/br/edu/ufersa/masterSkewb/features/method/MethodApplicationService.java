@@ -1,5 +1,6 @@
 package br.edu.ufersa.masterSkewb.features.method;
 
+import br.edu.ufersa.masterSkewb.features.cases.CaseService;
 import br.edu.ufersa.masterSkewb.features.method.dtos.MethodCreate;
 import br.edu.ufersa.masterSkewb.features.method.dtos.MethodResponse;
 import br.edu.ufersa.masterSkewb.features.method.dtos.MethodUpdate;
@@ -12,9 +13,11 @@ import java.util.List;
 @Service
 class MethodApplicationService {
     private final MethodRepository methodRepository;
+    private final CaseService caseService;
 
-    public MethodApplicationService(MethodRepository methodRepository) {
+    public MethodApplicationService(MethodRepository methodRepository, CaseService caseService) {
         this.methodRepository = methodRepository;
+        this.caseService = caseService;
     }
 
     public MethodResponse getMethodById(long methodId) {
@@ -48,9 +51,10 @@ class MethodApplicationService {
         return new MethodResponse(method.getId(), method.getName().name());
     }
 
-    public  MethodResponse deleteMethodById(long methodId) {
+    public void deleteMethodById(long methodId) {
         Method method = methodRepository.findById(methodId).orElseThrow();
         methodRepository.delete(method);
-        return new MethodResponse(method.getId(), method.getName().name());
+        caseService.deleteAllByMethodId(methodId);
+        new MethodResponse(method.getId(), method.getName().name());
     }
 }

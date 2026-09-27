@@ -3,6 +3,7 @@ package br.edu.ufersa.masterSkewb.features.cases;
 import br.edu.ufersa.masterSkewb.features.valueObjects.Name;
 import br.edu.ufersa.masterSkewb.features.valueObjects.StateId;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 
 @Entity
@@ -10,16 +11,17 @@ import jakarta.persistence.*;
 class Case {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Embedded
     private Name name;
     @Embedded
     private StateId stateId;
-    private long methodId;
+    @NotNull
+    private Long methodId;
 
     public Case() {}
 
-    public Case(long id, Name name, StateId stateId, long methodId) {
+    public Case(Long id, Name name, StateId stateId, long methodId) {
         this.id = id;
         this.name = name;
         this.stateId = stateId;
@@ -28,7 +30,7 @@ class Case {
 
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -40,7 +42,7 @@ class Case {
         return stateId;
     }
 
-    public long getMethodId() {
+    public Long getMethodId() {
         return methodId;
     }
 }
