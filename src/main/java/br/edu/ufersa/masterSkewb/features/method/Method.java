@@ -9,12 +9,12 @@ import jakarta.persistence.*;
 class Method {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Embedded
     private Name name;
 
-    public Method(long id, Name name) {
+    public Method(Long id, Name name) {
         this.id = id;
         this.name = name;
     }
@@ -23,7 +23,7 @@ class Method {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

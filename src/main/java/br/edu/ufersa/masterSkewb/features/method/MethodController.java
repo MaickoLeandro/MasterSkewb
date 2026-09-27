@@ -1,48 +1,52 @@
 package br.edu.ufersa.masterSkewb.features.method;
 
 import br.edu.ufersa.masterSkewb.features.method.dtos.MethodCreate;
-import br.edu.ufersa.masterSkewb.features.method.dtos.MethodPatch;
 import br.edu.ufersa.masterSkewb.features.method.dtos.MethodResponse;
 import br.edu.ufersa.masterSkewb.features.method.dtos.MethodUpdate;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/metodos")
+@Validated
 public class MethodController {
+    private final MethodApplicationService methodApplicationService;
+
+    public MethodController(MethodApplicationService methodApplicationService) {
+        this.methodApplicationService = methodApplicationService;
+    }
+
     @GetMapping
     public ResponseEntity<List<MethodResponse>> list(){
-        return null;
+        return ResponseEntity.ok(methodApplicationService.getMethods());
     }
 
     @GetMapping("/{methodId}")
-    public ResponseEntity<MethodResponse> findById (@PathVariable long methodId){
-        return null;
+    public ResponseEntity<MethodResponse> findById (@PathVariable Long methodId){
+        return ResponseEntity.ok(methodApplicationService.getMethodById(methodId));
     }
 
     @PostMapping
-    public ResponseEntity<MethodResponse> create(@RequestBody MethodCreate dto){
-        return null;
+    public ResponseEntity<MethodResponse> create(@RequestBody @Valid MethodCreate dto){
+        return ResponseEntity.ok(methodApplicationService.createMethod(dto));
     }
 
     @PutMapping("/{methodId}")
     public ResponseEntity<MethodResponse> update(
-            @PathVariable long methodId,
-            @RequestBody MethodUpdate dto) {
-        return null;
+            @PathVariable Long methodId,
+            @RequestBody @Valid MethodUpdate dto) {
+        return ResponseEntity.ok(methodApplicationService.updateMethod(methodId, dto));
     }
 
-    @PatchMapping("/{methodId}")
-    public ResponseEntity<MethodResponse> patch(
-            @PathVariable long methodId,
-            @RequestBody MethodPatch dto) {
-        return null;
-    }
 
     @DeleteMapping("/{methodId}")
-    public ResponseEntity<Void> delete(@PathVariable long methodId) {
-        return null;
+    public ResponseEntity<Void> delete(@PathVariable Long methodId) {
+        methodApplicationService.deleteMethodById(methodId);
+
+        return ResponseEntity.ok().build();
     }
 }
