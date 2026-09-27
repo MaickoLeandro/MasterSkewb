@@ -24,7 +24,9 @@ class MethodApplicationService {
     }
 
     public MethodResponse getMethodById(long methodId) {
-        Method method = methodRepository.findById(methodId).orElseThrow();
+        Method method = methodRepository.findById(methodId).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Método não encontrado")
+        );
 
         return new MethodResponse(method.getId(), method.getName().name());
     }
