@@ -5,6 +5,8 @@ import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseResponse;
 import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseUpdate;
 import br.edu.ufersa.masterSkewb.features.method.MethodService;
 import br.edu.ufersa.masterSkewb.features.method.dtos.MethodResponse;
+import br.edu.ufersa.masterSkewb.features.shared.exception.EntidadeNaoEncontradaException;
+import br.edu.ufersa.masterSkewb.features.shared.exception.OperacaoInvalidaException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +35,9 @@ class CaseApplicationService {
 
     public CaseResponse getCaseByMethodIdAndId(long methodId, long caseId) {
         MethodResponse methodResponse = methodService.getMethodById(methodId);
-        Case aCase = caseRepository.findById(caseId).orElseThrow();
+        Case aCase = caseRepository.findById(caseId).orElseThrow(
+                () -> new EntidadeNaoEncontradaException("Caso não encontrado")
+        );
 
         return toResponse(aCase, methodResponse);
 
@@ -42,15 +46,28 @@ class CaseApplicationService {
     @Transactional
     public CaseResponse createCase(long methodId, CaseCreate caseCreate) {
         MethodResponse methodResponse = methodService.getMethodById(methodId);
+
+        if (caseRepository.existsByMethodIdAndStateId(methodId, caseCreate.stateId())) {
+            throw new OperacaoInvalidaException("Caso já existente para o método");
+        }
+
         Case aCase = caseRepository.save(new Case(null, caseCreate.name(), caseCreate.stateId(), methodId));
+
+
 
         return toResponse(aCase, methodResponse);
     }
 
     @Transactional
     public CaseResponse updateCase(long methodId, long caseId, CaseUpdate caseUpdate) {
-        findCaseByIdAndMethodId(methodId, caseId);
+        Case oldCase = findCaseByIdAndMethodId(methodId, caseId);
         MethodResponse methodResponse = methodService.getMethodById(caseUpdate.methodId());
+
+        if ((oldCase.getMethodId() != methodId || oldCase.getStateId() != caseUpdate.stateId()) &&
+                caseRepository.existsByMethodIdAndStateId(methodId, caseUpdate.stateId())) {
+            throw new OperacaoInvalidaException("Caso já existente para o método");
+        }
+
         Case aCase = caseRepository.save(new Case(caseId, caseUpdate.name(), caseUpdate.stateId(), caseUpdate.methodId()));
 
         return toResponse(aCase, methodResponse);

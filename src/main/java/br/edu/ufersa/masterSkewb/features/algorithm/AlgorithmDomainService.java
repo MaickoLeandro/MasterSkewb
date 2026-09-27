@@ -16,7 +16,7 @@ public class AlgorithmDomainService {
     private final List<State> solvedStates = State.generatePerspectivesStates(State.getSolvedState());
     private final Moves moves = new AdvancedMoves();
 
-    public boolean validateAlgorithm(String sequence, Long stateId){
+    public String validateAlgorithm(String sequence, Long stateId){
         Set<String> notation = moves.getNotation().keySet();
         List<String> algorithm = Arrays.stream(sequence.split(" ")).toList();
 
@@ -29,10 +29,17 @@ public class AlgorithmDomainService {
         State state = StateRank.createState(stateId);
         moves.setState(state);
         moves.setUpdateState(true);
+
+        StringBuilder stringBuilder = new StringBuilder();
         for (String move : algorithm){
             moves.applyMove(move);
+            stringBuilder.append(move).append(" ");
+
+            if (solvedStates.contains(state)){
+                return stringBuilder.toString().trim();
+            }
         }
 
-        return solvedStates.contains(state);
+        return null;
     }
 }

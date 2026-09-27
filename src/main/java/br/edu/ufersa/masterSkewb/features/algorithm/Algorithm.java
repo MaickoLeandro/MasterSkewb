@@ -20,11 +20,11 @@ class Algorithm {
 
     public Algorithm() {}
 
-    public Algorithm(Long id,Long userId, Long caseId,  Moves moves) {
+    public Algorithm(Long id,Long userId, Long caseId, Moves moves) {
         this.id = id;
         this.userId = userId;
         this.caseId = caseId;
-        this.moves = Objects.requireNonNull(moves);
+        this.moves = moves;
     }
 
     public Long getId() {
