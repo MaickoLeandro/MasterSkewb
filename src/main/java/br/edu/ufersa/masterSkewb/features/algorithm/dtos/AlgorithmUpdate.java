@@ -5,6 +5,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-public record AlgorithmUpdate(@Positive long userId, @Positive long caseId, @NotNull @Valid Moves moves) {
+public record AlgorithmUpdate(@Positive long caseId, @NotNull @Valid Moves moves) {
 
 }

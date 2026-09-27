@@ -48,7 +48,8 @@ public class AlgorithmController {
             @PathVariable long methodId,
             @PathVariable long caseId,
             @PathVariable long algorithmId,
-            @RequestBody @Valid AlgorithmUpdate dto) {
+            @RequestBody @Valid AlgorithmUpdate dto
+    ) {
         return ResponseEntity.ok(algorithmApplicationService.updateAlgorithm(methodId, caseId, algorithmId, dto));
     }
 

@@ -40,7 +40,7 @@ class AlgorithmApplicationService {
     }
 
     @Transactional
-    public AlgorithmResponse createAlgorithm(long methodId, long caseId, AlgorithmCreate create) {
+    public AlgorithmResponse createAlgorithm(long userId, long methodId, long caseId, AlgorithmCreate create) {
         CaseResponse caseResponse = caseService.getCase(caseId, methodId);
 
         String finalMoves = algorithmDomainService.validateAlgorithm(create.moves().moves(), caseResponse.stateId().stateId());
@@ -55,12 +55,12 @@ class AlgorithmApplicationService {
         }
 
         Algorithm algorithm = algorithmRepository.save(
-                new Algorithm(null, create.userId(), caseId, moves));
+                new Algorithm(null, userId, caseId, moves));
         return toResponse(algorithm);
     }
 
     @Transactional
-    public AlgorithmResponse updateAlgorithm(long methodId, long caseId, long algorithmId, AlgorithmUpdate update) {
+    public AlgorithmResponse updateAlgorithm(long userId, long methodId, long caseId, long algorithmId, AlgorithmUpdate update) {
         CaseResponse caseResponse = caseService.getCase(caseId, methodId);
         algorithmRepository.findByIdAndCaseId(algorithmId, caseId).orElseThrow(
                 () -> new EntidadeNaoEncontradaException("Algoritmo não encontrado")
@@ -79,7 +79,7 @@ class AlgorithmApplicationService {
         }
 
         Algorithm algorithm = algorithmRepository.save(
-                new Algorithm(algorithmId, update.userId(), caseId, moves));
+                new Algorithm(algorithmId, userId, caseId, moves));
         return toResponse(algorithm);
     }
 
