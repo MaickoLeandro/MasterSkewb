@@ -28,7 +28,7 @@ public class CaseController {
 
     @GetMapping("/{caseId}")
     public ResponseEntity<CaseResponse> get(@PathVariable long methodId, @PathVariable long caseId) {
-        return ResponseEntity.ok(caseApplicationService.getCaseById(methodId, caseId));
+        return ResponseEntity.ok(caseApplicationService.getCaseByMethodIdAndId(methodId, caseId));
     }
 
 
@@ -45,8 +45,8 @@ public class CaseController {
     }
 
     @DeleteMapping("/{caseId}")
-    public ResponseEntity<Void> delete(@PathVariable  long methodId, @PathVariable long caseId) {
-        caseApplicationService.deleteCaseById(methodId, caseId);
+    public ResponseEntity<Void> delete(@PathVariable long methodId, @PathVariable long caseId) {
+        caseApplicationService.deleteCaseByMethodIdAndId(methodId, caseId);
         return ResponseEntity.ok().build();
     }
 }

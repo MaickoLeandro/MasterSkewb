@@ -31,7 +31,7 @@ class CaseApplicationService {
         return responses;
     }
 
-    public CaseResponse getCaseById(long methodId, long caseId) {
+    public CaseResponse getCaseByMethodIdAndId(long methodId, long caseId) {
         MethodResponse methodResponse = methodService.getMethodById(methodId);
         Case aCase = caseRepository.findById(caseId).orElseThrow();
 
@@ -57,14 +57,14 @@ class CaseApplicationService {
     }
 
     @Transactional
-    public void deleteCaseById(long methodId, long caseId) {
+    public void deleteCaseByMethodIdAndId(long methodId, long caseId) {
         caseRepository.delete(findCaseByIdAndMethodId(methodId, caseId));
     }
 
     public CaseResponse getCaseByIdAndMethodId(long methodId, long caseId) {
         Case aCase = findCaseByIdAndMethodId(methodId,  caseId);
 
-        return toResponse(aCase, methodService.getMethodById(caseId));
+        return toResponse(aCase, methodService.getMethodById(methodId));
     }
 
     private Case findCaseByIdAndMethodId(long methodId, long caseId) {

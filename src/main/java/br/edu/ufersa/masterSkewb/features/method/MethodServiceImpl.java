@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 @Service
 class MethodServiceImpl implements MethodService {
     MethodRepository methodRepository;
-    public MethodServiceImpl(MethodRepository methodRepository) {}
+    public MethodServiceImpl(MethodRepository methodRepository) {
+        this.methodRepository = methodRepository;
+    }
 
     @Override
     public MethodResponse getMethodById(long methodId) {
