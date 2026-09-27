@@ -5,15 +5,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 class MethodServiceImpl implements MethodService {
-    private final MethodApplicationService methodApplicationService;
-
-    public MethodServiceImpl(MethodApplicationService methodApplicationService) {
-        this.methodApplicationService = methodApplicationService;
-    }
+    MethodRepository methodRepository;
+    public MethodServiceImpl(MethodRepository methodRepository) {}
 
     @Override
     public MethodResponse getMethodById(long methodId) {
-        return methodApplicationService.getMethodById(methodId);
+        Method method = methodRepository.findById(methodId).orElseThrow();
+
+        return  new MethodResponse(methodId, method.getName().name());
     }
 
 }

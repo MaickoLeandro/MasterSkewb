@@ -6,6 +6,7 @@ import br.edu.ufersa.masterSkewb.features.algorithm.dtos.AlgorithmUpdate;
 import br.edu.ufersa.masterSkewb.features.algorithm.exceptions.NotSolvedException;
 import br.edu.ufersa.masterSkewb.features.cases.CaseService;
 import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseResponse;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,7 @@ class AlgorithmApplicationService {
         return toResponse(algorithm);
     }
 
+    @Transactional
     public AlgorithmResponse createAlgorithm(long methodId, long caseId, AlgorithmCreate create) {
         CaseResponse caseResponse = caseService.getCase(caseId, methodId);
 
@@ -44,6 +46,7 @@ class AlgorithmApplicationService {
         return toResponse(algorithm);
     }
 
+    @Transactional
     public AlgorithmResponse updateAlgorithm(long methodId, long caseId, long algorithmId, AlgorithmUpdate update) {
         CaseResponse caseResponse = caseService.getCase(caseId, methodId);
         algorithmRepository.findByIdAndCaseId(algorithmId, caseId).orElseThrow();
@@ -57,6 +60,7 @@ class AlgorithmApplicationService {
         return toResponse(algorithm);
     }
 
+    @Transactional
     public void deleteAlgorithm(long methodId, long caseId, long algorithmId) {
         caseService.getCase(caseId, methodId);
         Algorithm algorithm = algorithmRepository.findByIdAndCaseId(algorithmId, caseId).orElseThrow();

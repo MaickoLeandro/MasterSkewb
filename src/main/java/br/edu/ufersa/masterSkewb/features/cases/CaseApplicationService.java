@@ -5,6 +5,7 @@ import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseResponse;
 import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseUpdate;
 import br.edu.ufersa.masterSkewb.features.method.MethodService;
 import br.edu.ufersa.masterSkewb.features.method.dtos.MethodResponse;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ class CaseApplicationService {
 
     }
 
+    @Transactional
     public CaseResponse createCase(long methodId, CaseCreate caseCreate) {
         MethodResponse methodResponse = methodService.getMethodById(methodId);
         Case aCase = caseRepository.save(new Case(null, caseCreate.name(), caseCreate.stateId(), methodId));
@@ -45,6 +47,7 @@ class CaseApplicationService {
         return toResponse(aCase, methodResponse);
     }
 
+    @Transactional
     public CaseResponse updateCase(long methodId, long caseId, CaseUpdate caseUpdate) {
         findCaseByIdAndMethodId(methodId, caseId);
         MethodResponse methodResponse = methodService.getMethodById(caseUpdate.methodId());
@@ -53,6 +56,7 @@ class CaseApplicationService {
         return toResponse(aCase, methodResponse);
     }
 
+    @Transactional
     public void deleteCaseById(long methodId, long caseId) {
         caseRepository.delete(findCaseByIdAndMethodId(methodId, caseId));
     }

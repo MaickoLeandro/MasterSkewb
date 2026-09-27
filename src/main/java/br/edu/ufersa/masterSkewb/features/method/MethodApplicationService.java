@@ -5,6 +5,7 @@ import br.edu.ufersa.masterSkewb.features.method.dtos.MethodCreate;
 import br.edu.ufersa.masterSkewb.features.method.dtos.MethodResponse;
 import br.edu.ufersa.masterSkewb.features.method.dtos.MethodUpdate;
 import br.edu.ufersa.masterSkewb.features.valueObjects.Name;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ class MethodApplicationService {
 
         return methodResponseList;
     }
-
+    @Transactional
     public MethodResponse createMethod(MethodCreate methodCreate) {
         if (methodRepository.existsByNameName(methodCreate.name())){}
 
@@ -43,6 +44,7 @@ class MethodApplicationService {
         return new MethodResponse(method.getId(), method.getName().name());
     }
 
+    @Transactional
     public MethodResponse updateMethod(long id, MethodUpdate methodPatch) {
         if (!methodRepository.existsById(id)){}
 
@@ -51,6 +53,7 @@ class MethodApplicationService {
         return new MethodResponse(method.getId(), method.getName().name());
     }
 
+    @Transactional
     public void deleteMethodById(long methodId) {
         Method method = methodRepository.findById(methodId).orElseThrow();
         methodRepository.delete(method);
