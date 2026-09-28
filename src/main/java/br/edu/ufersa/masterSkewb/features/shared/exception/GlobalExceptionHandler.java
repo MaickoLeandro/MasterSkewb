@@ -52,8 +52,8 @@ public class GlobalExceptionHandler {
     }
 
     // Violação de regra de negócio/duplicidade (HTTP 422 Unprocessable Entity)
-    @ExceptionHandler(OperacaoInvalidaException.class)
-    public ProblemDetail tratarOperacaoInvalida(OperacaoInvalidaException ex) {
+    @ExceptionHandler(InvalidOperationException.class)
+    public ProblemDetail tratarOperacaoInvalida(InvalidOperationException ex) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(
                 HttpStatus.UNPROCESSABLE_ENTITY,
                 ex.getMessage()
@@ -65,8 +65,8 @@ public class GlobalExceptionHandler {
     }
 
     // Recurso não encontrado (HTTP 404 Not Found)
-    @ExceptionHandler(EntidadeNaoEncontradaException.class)
-    public ProblemDetail tratarEntidadeNaoEncontrada(EntidadeNaoEncontradaException ex) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ProblemDetail tratarEntidadeNaoEncontrada(ResourceNotFoundException ex) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(
                 HttpStatus.NOT_FOUND,
                 ex.getMessage()
@@ -78,8 +78,8 @@ public class GlobalExceptionHandler {
     }
 
     // Handler coringa para quaisquer outras exceções derivadas de NegocioException
-    @ExceptionHandler(NegocioException.class)
-    public ProblemDetail tratarNegocioGenerico(NegocioException ex) {
+    @ExceptionHandler(BusinessException.class)
+    public ProblemDetail tratarNegocioGenerico(BusinessException ex) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(
                 HttpStatus.BAD_REQUEST,
                 ex.getMessage()

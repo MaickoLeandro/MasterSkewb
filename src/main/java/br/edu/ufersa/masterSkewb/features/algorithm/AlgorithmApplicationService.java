@@ -6,8 +6,8 @@ import br.edu.ufersa.masterSkewb.features.algorithm.dtos.AlgorithmUpdate;
 import br.edu.ufersa.masterSkewb.features.algorithm.exceptions.NotSolvedException;
 import br.edu.ufersa.masterSkewb.features.cases.CaseService;
 import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseResponse;
-import br.edu.ufersa.masterSkewb.features.shared.exception.EntidadeNaoEncontradaException;
-import br.edu.ufersa.masterSkewb.features.shared.exception.OperacaoInvalidaException;
+import br.edu.ufersa.masterSkewb.features.shared.exception.ResourceNotFoundException;
+import br.edu.ufersa.masterSkewb.features.shared.exception.InvalidOperationException;
 import br.edu.ufersa.masterSkewb.features.valueObjects.Moves;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ class AlgorithmApplicationService {
     public AlgorithmResponse getAlgorithmById(long methodId, long caseId, long algorithmId) {
         caseService.getCase(caseId, methodId);
         Algorithm algorithm = algorithmRepository.findByIdAndCaseId(algorithmId, caseId).orElseThrow(
-                () -> new EntidadeNaoEncontradaException("Algoritmo não encontrado")
+                () -> new ResourceNotFoundException("Algoritmo não encontrado")
         );
         return toResponse(algorithm);
     }
@@ -51,7 +51,7 @@ class AlgorithmApplicationService {
         Moves moves = new Moves(finalMoves);
 
         if (algorithmRepository.existsAlgorithmByMoves(moves)){
-            throw new OperacaoInvalidaException("Algoritmo já existente");
+            throw new InvalidOperationException("Algoritmo já existente");
         }
 
         Algorithm algorithm = algorithmRepository.save(
@@ -63,7 +63,7 @@ class AlgorithmApplicationService {
     public AlgorithmResponse updateAlgorithm(long userId, long methodId, long caseId, long algorithmId, AlgorithmUpdate update) {
         CaseResponse caseResponse = caseService.getCase(caseId, methodId);
         algorithmRepository.findByIdAndCaseId(algorithmId, caseId).orElseThrow(
-                () -> new EntidadeNaoEncontradaException("Algoritmo não encontrado")
+                () -> new ResourceNotFoundException("Algoritmo não encontrado")
         );
 
         String finalMoves = algorithmDomainService.validateAlgorithm(update.moves().moves(), caseResponse.stateId().stateId());
@@ -75,7 +75,7 @@ class AlgorithmApplicationService {
         Moves moves = new Moves(finalMoves);
 
         if (algorithmRepository.existsAlgorithmByMoves(moves)){
-            throw new OperacaoInvalidaException("Algoritmo já existente");
+            throw new InvalidOperationException("Algoritmo já existente");
         }
 
         Algorithm algorithm = algorithmRepository.save(
@@ -87,7 +87,7 @@ class AlgorithmApplicationService {
     public void deleteAlgorithm(long methodId, long caseId, long algorithmId) {
         caseService.getCase(caseId, methodId);
         Algorithm algorithm = algorithmRepository.findByIdAndCaseId(algorithmId, caseId).orElseThrow(
-                () -> new EntidadeNaoEncontradaException("Algoritmo não encontrado")
+                () -> new ResourceNotFoundException("Algoritmo não encontrado")
         );
         algorithmRepository.delete(algorithm);
     }
