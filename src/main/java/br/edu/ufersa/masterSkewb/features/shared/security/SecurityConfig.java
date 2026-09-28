@@ -34,6 +34,10 @@ public class SecurityConfig {
                     req.requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/api/v1/auth/register").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/api/v1/auth").hasRole("ADMIN");
+                    req.requestMatchers(HttpMethod.GET, "/api/v1/metodos").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/api/v1/metodos/{methodId}/casos").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/api/v1/metodos/{methodId}/casos/{caseId}/algoritmos").permitAll();
+
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(
