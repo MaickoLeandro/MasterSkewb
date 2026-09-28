@@ -4,12 +4,15 @@ import br.edu.ufersa.masterSkewb.features.auth.User;
 import br.edu.ufersa.masterSkewb.features.algorithm.dtos.AlgorithmCreate;
 import br.edu.ufersa.masterSkewb.features.algorithm.dtos.AlgorithmResponse;
 import br.edu.ufersa.masterSkewb.features.algorithm.dtos.AlgorithmUpdate;
+import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -42,8 +45,15 @@ public class AlgorithmController {
             @PathVariable long methodId,
             @PathVariable long caseId,
             @RequestBody @Valid AlgorithmCreate dto,
-            @AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(algorithmApplicationService.createAlgorithm(user.getId(), methodId, caseId, dto));
+            @AuthenticationPrincipal User user,
+            UriComponentsBuilder uriBuilder) {
+
+        AlgorithmResponse salvo = algorithmApplicationService.createAlgorithm(user.getId(), methodId, caseId, dto);
+        URI uri = uriBuilder
+                .path("/api/v1/metodos/{methodId}/casos/{caseId}/algoritmos/{algorithmId}")
+                .buildAndExpand(methodId, caseId, salvo.id())
+                .toUri();
+        return ResponseEntity.created(uri).body(salvo);
     }
 
     @PutMapping("/{algorithmId}")

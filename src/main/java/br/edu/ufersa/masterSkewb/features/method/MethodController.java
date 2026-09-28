@@ -7,7 +7,9 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,8 +33,14 @@ public class MethodController {
     }
 
     @PostMapping
-    public ResponseEntity<MethodResponse> create(@RequestBody @Valid MethodCreate dto){
-        return ResponseEntity.ok(methodApplicationService.createMethod(dto));
+    public ResponseEntity<MethodResponse> create(@RequestBody @Valid MethodCreate dto,
+                                                 UriComponentsBuilder uriBuilder){
+        MethodResponse salvo = methodApplicationService.createMethod(dto);
+        URI uri = uriBuilder
+                .path("/api/v1/metodos/{methodId}")
+                .buildAndExpand(salvo.id())
+                .toUri();
+        return ResponseEntity.created(uri).body(salvo);
     }
 
     @PutMapping("/{methodId}")

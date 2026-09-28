@@ -3,11 +3,14 @@ package br.edu.ufersa.masterSkewb.features.cases;
 import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseCreate;
 import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseResponse;
 import br.edu.ufersa.masterSkewb.features.cases.dtos.CaseUpdate;
+import br.edu.ufersa.masterSkewb.features.method.dtos.MethodResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -33,8 +36,15 @@ public class CaseController {
 
 
     @PostMapping
-    public ResponseEntity<CaseResponse> post(@PathVariable long methodId, @RequestBody @Valid CaseCreate dto) {
-        return ResponseEntity.ok(caseApplicationService.createCase(methodId, dto));
+    public ResponseEntity<CaseResponse> post(@PathVariable long methodId,
+                                             @RequestBody @Valid CaseCreate dto,
+                                             UriComponentsBuilder uriBuilder) {
+        CaseResponse salvo = caseApplicationService.createCase(methodId,dto);
+        URI uri = uriBuilder
+                .path("/api/v1/metodos/{methodId}/casos/{caseId}")
+                .buildAndExpand(methodId,salvo.id())
+                .toUri();
+        return ResponseEntity.created(uri).body(salvo);
     }
 
     @PutMapping("/{caseId}")
