@@ -37,6 +37,8 @@ public class SecurityConfig {
                     req.requestMatchers(HttpMethod.GET, "/api/v1/auth").hasRole("ADMIN");
                     req.requestMatchers(HttpMethod.GET, "/api/v1/metodos").permitAll();
                     req.requestMatchers(HttpMethod.GET, "/api/v1/metodos/{methodId}/casos").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/api/v1/metodos/{methodId}").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/api/v1/metodos/{methodId}/casos/{caseId}").permitAll();
 
                     req.requestMatchers(HttpMethod.POST, "/api/v1/metodos").hasRole("ADMIN");
                     req.requestMatchers(HttpMethod.PUT, "/api/v1/metodos/{methodId}/").hasRole("ADMIN");
@@ -47,6 +49,7 @@ public class SecurityConfig {
                     req.requestMatchers(HttpMethod.DELETE, "/api/v1/metodos/{methodId}/casos/{caseId}").hasRole("ADMIN");
 
                     req.requestMatchers(HttpMethod.GET, "/api/v1/metodos/{methodId}/casos/{caseId}/algoritmos").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/api/v1/metodos/{methodId}/casos/{caseId}/algoritmos/{algorithmId}").permitAll();
 
                     req.anyRequest().authenticated();
                 })
